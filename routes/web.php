@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resources(
+    [
+    'Account' => 'AccountController',
+    'Product' => 'ProductController',
+    'Cart' => 'CartController',
+    'Order' => 'OrderController',
+    ]
+);
