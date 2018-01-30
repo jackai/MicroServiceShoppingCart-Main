@@ -30,16 +30,6 @@ class AccountController extends Controller
         );
     }
 
-    function generateRandomString($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -50,9 +40,9 @@ class AccountController extends Controller
     {
         $response = Curl::to(env('ACCOUNT_SERVICE_URI').'account')
             ->withData([
-                'name'=>$this->generateRandomString(10),
-                'email'=>$this->generateRandomString(10) . '@email.com',
-                'password'=>$this->generateRandomString(20)
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>$request->password
             ])
             ->asJson( true )
             ->post();
